@@ -9,3 +9,9 @@ debug = DebugToolbarExtension(app)
 boggle_game = Boggle()
 
 
+@app.route('/')
+def show_board():
+    """Shows board at root"""
+    board = boggle_game.make_board()
+    session['board'] = board
+    return render_template('submit_guess.html', board=board)
