@@ -6,11 +6,12 @@ $(function(){
         evt.preventDefault();
         const input = $('#guess').val();
         const response = await sendToServer(input);
+        console.log(`What is the server response: ${response}`)
         return response;
     });
 
     // Posts input to server. Returns response.
     async function sendToServer(input){
-        return await $.post('/');
+        return await $.post('/', {'guess' : input});
     };
 });

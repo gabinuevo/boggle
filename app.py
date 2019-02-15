@@ -1,5 +1,5 @@
 from boggle import Boggle
-from flask import Flask, session, request, render_template, redirect, make_response
+from flask import Flask, session, request, render_template, redirect, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
@@ -22,4 +22,6 @@ def show_server_response():
     """Take post request of word from client,
     determine if word is correct or invalid"""
     guess = request.form['guess']
-    
+    board = session['board']
+    response_to_client = boggle_game.check_valid_word(board, guess)
+    return jsonify(response_to_client)
