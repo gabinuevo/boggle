@@ -15,3 +15,11 @@ def show_board():
     board = boggle_game.make_board()
     session['board'] = board
     return render_template('submit_guess.html', board=board)
+
+
+@app.route('/', methods=["POST"])
+def show_server_response():
+    """Take post request of word from client,
+    determine if word is correct or invalid"""
+    guess = request.form['guess']
+    

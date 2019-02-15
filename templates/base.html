@@ -8,11 +8,16 @@
 </head>
 <body>
     <h1>Let's play boggle!</h1>
-    {% for row in board %}
-    <div>{{ row }}</div>
-    {% endfor %}
+    <table>
+        {% for row in board %}
+        <tr>{% for letter in row %}<td>{{ letter }}</td>{% endfor %}</tr>
+        {% endfor %}
+    </table>
     {% block content%}
  
     {% endblock%}
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+<script src="/static/boggle.js"></script>
 </html>
