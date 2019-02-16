@@ -29,14 +29,20 @@ $(function(){
     }
 
     // timer that counts down from 60 seconds.
-    setInterval(function(){
+    setInterval(async function(){
+        if (timer>0){
         timer--;
         $('#timer').empty();
         $('#timer').html(timer);
-        if (!timer) {
+        } else {
             $('#guess-input-form').hide();
-            $('#timer-container').html("<b>GAMEOVER</b>")
+            $('#timer-container').html("<b>GAMEOVER</b>");
+            const response = await updateHighScore(score);
+            $('#best-score-div').html('')
         }
+    }, 1000)
+
+    async function updateHighScore(score){
+        return await $.post('/', {'score' : score});
     }
-        , 1000)
 });

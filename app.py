@@ -8,6 +8,8 @@ app.config['SECRET_KEY'] = "fuiserfobcai23618sdjahb"
 debug = DebugToolbarExtension(app)
 boggle_game = Boggle()
 
+# session['number_of_games_played'] = 0
+# session['highest_score'] = 0
 
 @app.route('/')
 def show_board():
@@ -21,8 +23,15 @@ def show_board():
 def show_server_response():
     """Take post request of word from client,
     determine if word is correct or invalid"""
-    guess = request.form['guess']
-    board = session['board']
-    response_str = boggle_game.check_valid_word(board, guess)
-    response_to_client = {"result": response_str}
-    return jsonify(response_to_client)
+    if request.form['guess']:
+        guess = request.form['guess']
+        board = session['board']
+        response_str = boggle_game.check_valid_word(board, guess)
+        response_to_client = {"result": response_str}
+        return jsonify(response_to_client)
+    elif request.form['score']:
+        session['number_of_games_played'] += 1
+        if request.form['score'] > session['highest_score']:
+            session['highest_score'] = request.form['score']
+        response_to_client = {'highest_score': session['highest_score']}
+        return jsonify(response_to_client)
