@@ -1,5 +1,5 @@
 from boggle import Boggle
-from flask import Flask, session, request, render_template, redirect, jsonify
+from flask import Flask, session, request, render_template, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
@@ -35,3 +35,4 @@ def show_server_response():
             session['highest_score'] = request.form['score']
         response_to_client = {'highest_score': session['highest_score']}
         return jsonify(response_to_client)
+
