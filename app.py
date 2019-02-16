@@ -23,5 +23,6 @@ def show_server_response():
     determine if word is correct or invalid"""
     guess = request.form['guess']
     board = session['board']
-    response_to_client = boggle_game.check_valid_word(board, guess)
+    response_str = boggle_game.check_valid_word(board, guess)
+    response_to_client = {"result": response_str}
     return jsonify(response_to_client)
