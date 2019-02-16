@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>Let's play boggle!</h1>
+    <div id="timer-container">Seconds remaining: <span id="timer"></span></div>
     <table>
         {% for row in board %}
         <tr>{% for letter in row %}<td>{{ letter }}</td>{% endfor %}</tr>
